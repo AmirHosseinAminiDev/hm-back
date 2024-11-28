@@ -7,7 +7,7 @@
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-7  w-full justify-between  ">
                 @forelse($homePageData['latestCategories'] as $category)
-                    <a href="#"
+                    <a wire:click="getCategoryQuestions('{{$category['id']}}')"
                        class="flex gap-[10px] dark:text-[#FCFCFC] bg-[#FFFFFF] dark:bg-[#0C0D0F] dark:border-[#191B21] border border-[#F4F4F4] rounded-xl px-2 py-2 md:px-6 md:py-4 w-full items-center">
                         <div class="bg-[#ECEEFF] dark:bg-[#201A06] rounded-full p-[1px] w-[33px] h-[33px]">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
