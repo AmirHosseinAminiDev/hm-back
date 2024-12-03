@@ -17,7 +17,7 @@ class HomePageService
     /**
      * @throws \Exception
      */
-    public function getData($endpoint, $params = [] , $category = null): string|JsonResponse
+    public function getData($endpoint, $params = [], $category = null): string|JsonResponse
     {
 
         if ($category === null) {
@@ -27,7 +27,7 @@ class HomePageService
             }
             throw new \Exception('Failed to fetch data from API: ' . $response->status());
 
-        }else{
+        } else {
             $params ['category'] = $category;
             $response = Http::get($this->baseUrl . $endpoint, $params);
             if ($response->successful()) {
@@ -36,6 +36,30 @@ class HomePageService
             throw new \Exception('Failed to fetch data from API: ' . $response->status());
         }
 
+    }
+
+    public function createNewQuestion($endpoint, $data): string|JsonResponse
+    {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->post($this->baseUrl . $endpoint, $data);
+        if ($response->successful()) {
+            return $response->body();
+        }
+        throw new \Exception('Failed to fetch data from API: ' . $response->status());
+    }
+
+    public function changeQuestionStatus($endpoint)
+    {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->post($this->baseUrl . $endpoint);
+        if ($response->successful()) {
+            return $response->body();
+        }
+        throw new \Exception('Failed to fetch data from API: ' . $response->status());
     }
 
 }

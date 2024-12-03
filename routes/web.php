@@ -11,8 +11,10 @@ Route::get('/questions/question/{slug}', SingleQuestion::class)->name('single-qu
 //===========
 //AUTH SYSTEM
 //===========
-Route::middleware('guest')->prefix('auth')->group(function(){
-    Route::get('/register' , RegisterController::class)->name('register');
-    Route::get('/redirect' , [LoginController::class , 'redirect'])->name('login');
-    Route::get('/callback' , [LoginController::class , 'callback'])->name('auth.callback');
+Route::middleware('guest')->prefix('auth')->group(function () {
+    Route::get('/register', RegisterController::class)->name('register');
+    Route::get('/redirect', [LoginController::class, 'redirect'])->name('login');
+    Route::get('/callback', [LoginController::class, 'callback'])->name('auth.callback');
 });
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
